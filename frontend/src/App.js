@@ -10,7 +10,7 @@ function App() {
     <Router>
       <div className="App">
         <Header />
-        <div class="container">
+        <div className="container">
           <Routes>
             {userRoutes}
           </Routes>
