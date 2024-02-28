@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
   return (
@@ -6,9 +7,9 @@ const Header = () => {
     <nav className="navbar row">
       <div className="col-12 col-md-3 ps-5">
         <div className="navbar-brand">
-          <a href="/">
+          <Link to="/">
             <img src="/images/elite-shop-logo.png" alt="ShopIT Logo" />
-          </a>
+          </Link>
         </div>
       </div>
       <div className="col-12 col-md-6 mt-2 mt-md-0">
@@ -21,7 +22,7 @@ const Header = () => {
               className="form-control"
               placeholder="Enter Product Name ..."
               name="keyword"
-              value=""
+              defaultValue=""
             />
             <button id="search_btn" className="btn" type="submit">
               <i className="fa fa-search" aria-hidden="true"></i>
@@ -30,10 +31,10 @@ const Header = () => {
         </form>
       </div>
       <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
-        <a href="/cart" style={{textDecoration:"none"}}>
+        <Link to="/cart" style={{textDecoration:"none"}}>
           <span id="cart" className="ms-3"> Cart </span>
           <span className="ms-1" id="cart_count">0</span>
-        </a>
+        </Link>
 
         <div className="ms-4 dropdown">
           <button
@@ -53,17 +54,17 @@ const Header = () => {
             <span>User</span>
           </button>
           <div className="dropdown-menu w-100" aria-labelledby="dropDownMenuButton">
-            <a className="dropdown-item" href="/admin/dashboard"> Dashboard </a>
+            <Link className="dropdown-item" to="/admin/dashboard"> Dashboard </Link>
 
-            <a className="dropdown-item" href="/me/orders"> Orders </a>
+            <Link className="dropdown-item" to="/me/orders"> Orders </Link>
 
-            <a className="dropdown-item" href="/me/profile"> Profile </a>
+            <Link className="dropdown-item" to="/me/profile"> Profile </Link>
 
-            <a className="dropdown-item text-danger" href="/"> Logout </a>
+            <Link className="dropdown-item text-danger" to="/"> Logout </Link>
           </div>
         </div>
 
-        <a href="/login" className="btn ms-4" id="login_btn"> Login </a>
+        <Link to="/login" className="btn ms-4" id="login_btn"> Login </Link>
       </div>
     </nav>
     </>

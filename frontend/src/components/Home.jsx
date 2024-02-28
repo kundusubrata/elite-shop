@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MetaData from "./layout/MetaData";
 import { useGetProductsQuery } from "../redux/api/productsApi";
 import ProductItem from "./product/ProductItem";
+import Loader from "./layout/Loader";
+import { toast } from "react-hot-toast";
 
 const Home = () => {
-  const { data } = useGetProductsQuery();
+  const { data, isLoading,error,isError } = useGetProductsQuery();
+
+  useEffect(() => {
+    if(isError){
+      toast.error(error?.data?.message)
+    }
+  }, [isError,error])
+
+  if (isLoading) return <Loader />;
 
   return (
     <>
@@ -19,7 +29,7 @@ const Home = () => {
             <div className="row">
               {/* Product Item 1 */}
               {data?.products?.map((product) => (
-                <ProductItem product={product} />
+                <ProductItem key={product?._id} product={product} />
               ))}
 
               {/* End Product Item 1 */}
