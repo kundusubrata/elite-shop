@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const productSchema = mongoose.Schema(
   {
@@ -83,8 +83,8 @@ const productSchema = mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      //   required: true,
-      required: false,
+      required: true,
+      // required: false,
     },
   },
   { timestamps: true }

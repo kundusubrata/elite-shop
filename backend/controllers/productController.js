@@ -8,6 +8,8 @@ export const getProducts = catchAsyncErrors(async (req, res, next) => {
   const resPerPage = 4;
   const apiFilters = new APIFilters(Product, req.query).search().filters();
 
+  // console.log("req user", req?.user); // check for isAuthenticatedUser in auth.js
+
   let products = await apiFilters.query;
   let filterProductCount = products.length;
 
@@ -27,6 +29,12 @@ export const getProducts = catchAsyncErrors(async (req, res, next) => {
 
 // Create New Product -- ADMIN  ==> /api/v1/admin/products
 export const newProduct = catchAsyncErrors(async (req, res, next) => {
+  // if (!req.user || !req.user._id) {
+  //   return next(new ErrorHandler("User not authenticated", 401));
+  // }
+
+  req.body.user = req.user._id;
+
   const product = await Product.create(req.body);
 
   res.status(200).json({
