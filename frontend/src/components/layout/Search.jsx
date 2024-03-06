@@ -3,14 +3,15 @@ import { useNavigate } from "react-router-dom";
 
 const Search = () => {
   const [keyword, setKeyword] = useState("");
+  const [debounceKeyword, setDebounceKeyword] = useState("")
   const navigate = useNavigate();
 
   useEffect(() => {
-    const timeOutId = setTimeout(() => {
-        // console.log(keyword);
+    const debounceKeyword = setTimeout(() => {
+        setDebounceKeyword(keyword)
     }, 1000);
     return () => {
-        clearTimeout(timeOutId);
+        clearTimeout(debounceKeyword);
     }
   }, [keyword])
   
@@ -18,8 +19,8 @@ const Search = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (keyword?.trim()) {
-      navigate(`/?keyword=${keyword}`);
+    if (debounceKeyword?.trim()) {
+      navigate(`/?keyword=${debounceKeyword}`);
     } else {
       navigate(`/`);
     }
