@@ -10,6 +10,8 @@ const Profile = lazy(() => import("../user/Profile"));
 const UpdateProfile = lazy(() => import("../user/UpdateProfile"));
 const UploadAvatar = lazy(() => import("../user/UploadAvatar"));
 const UpdatePassword = lazy(() => import("../user/UpdatePassword"));
+const ForgotPassword = lazy(() => import("../auth/ForgotPassword"));
+const ResetPassword = lazy(() => import("../auth/ResetPassword"));
 
 const userRoutes = () => {
   return (
@@ -18,6 +20,9 @@ const userRoutes = () => {
       <Route path="/product/:id" element={<ProductDetails />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+
+      <Route path="/password/forgot" element={<ForgotPassword />} />
+      <Route path="/password/reset/:token" element={<ResetPassword />} />
 
       <Route
         path="/me/profile"
