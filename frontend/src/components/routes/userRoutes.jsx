@@ -13,6 +13,9 @@ const UpdatePassword = lazy(() => import("../user/UpdatePassword"));
 const ForgotPassword = lazy(() => import("../auth/ForgotPassword"));
 const ResetPassword = lazy(() => import("../auth/ResetPassword"));
 const Cart = lazy(() => import("../cart/Cart"));
+const Shipping = lazy(() => import("../cart/Shipping"));
+const ConfirmOrder = lazy(() => import("../cart/ConfirmOrder"));
+const PaymentMethod = lazy(() => import("../cart/PaymentMethod"));
 
 const userRoutes = () => {
   return (
@@ -59,6 +62,30 @@ const userRoutes = () => {
       />
 
       <Route path="/cart" element={<Cart />} />
+      <Route
+        path="/shipping"
+        element={
+          <ProtectedRoute>
+            <Shipping />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/confirm_order"
+        element={
+          <ProtectedRoute>
+            <ConfirmOrder />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/payment_method"
+        element={
+          <ProtectedRoute>
+            <PaymentMethod />
+          </ProtectedRoute>
+        }
+      />
     </>
   );
 };
