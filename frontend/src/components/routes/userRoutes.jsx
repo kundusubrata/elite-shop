@@ -12,6 +12,7 @@ const UploadAvatar = lazy(() => import("../user/UploadAvatar"));
 const UpdatePassword = lazy(() => import("../user/UpdatePassword"));
 const ForgotPassword = lazy(() => import("../auth/ForgotPassword"));
 const ResetPassword = lazy(() => import("../auth/ResetPassword"));
+const Cart = lazy(() => import("../cart/Cart"));
 
 const userRoutes = () => {
   return (
@@ -56,6 +57,8 @@ const userRoutes = () => {
           </ProtectedRoute>
         }
       />
+
+      <Route path="/cart" element={<Cart />} />
     </>
   );
 };
