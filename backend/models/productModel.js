@@ -70,11 +70,11 @@ const productSchema = mongoose.Schema(
           ref: "User",
           required: true,
         },
-        ratings: {
-          type: String,
+        rating: {
+          type: Number,
           required: true,
         },
-        Comment: {
+        comment: {
           type: String,
           required: true,
         },
