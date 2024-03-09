@@ -4,9 +4,11 @@ import Loader from "../layout/Loader";
 import toast from "react-hot-toast";
 import { Link, useParams } from "react-router-dom";
 import StarRatings from "react-star-ratings";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCartItem } from "../../redux/features/cartSlice";
 import MetaData from "../layout/MetaData";
+import NewReview from "../reviews/NewReview";
+import ListReviews from "../reviews/ListReviews";
 
 const ProductDetails = () => {
   const params = useParams();
@@ -17,6 +19,7 @@ const ProductDetails = () => {
     params.id
   );
   const product = data?.product;
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   useEffect(() => {
     setActiveImage(
@@ -131,7 +134,7 @@ const ProductDetails = () => {
               type="number"
               className="form-control count d-inline"
               value={quantity}
-              readonly
+              readOnly
             />
             <span className="btn btn-primary plus" onClick={increseQty}>
               +
@@ -141,7 +144,7 @@ const ProductDetails = () => {
             type="button"
             id="cart_btn"
             className="btn btn-primary d-inline ms-4"
-            disabled={product.stock <= 0}
+            disabled={product?.stock <= 0}
             onClick={setItemToCart}
           >
             Add to Cart
@@ -168,11 +171,18 @@ const ProductDetails = () => {
             Sold by: <strong>{product?.seller}</strong>
           </p>
 
-          <div className="alert alert-danger my-5" type="alert">
-            Login to post your review.
-          </div>
+          {isAuthenticated ? (
+            <NewReview productId={product?._id} />
+          ) : (
+            <div className="alert alert-danger my-5" type="alert">
+              Login to post your review.
+            </div>
+          )}
         </div>
       </div>
+      {product?.reviews?.length > 0 && (
+        <ListReviews reviews={product?.reviews} />
+      )}
     </>
   );
 };

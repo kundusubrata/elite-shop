@@ -16,6 +16,9 @@ const Cart = lazy(() => import("../cart/Cart"));
 const Shipping = lazy(() => import("../cart/Shipping"));
 const ConfirmOrder = lazy(() => import("../cart/ConfirmOrder"));
 const PaymentMethod = lazy(() => import("../cart/PaymentMethod"));
+const MyOrders = lazy(() => import("../order/MyOrders"));
+const OrderDetails = lazy(() => import("../order/OrderDetails"));
+const Invoice = lazy(() => import("../invoice/Invoice"));
 
 const userRoutes = () => {
   return (
@@ -83,6 +86,30 @@ const userRoutes = () => {
         element={
           <ProtectedRoute>
             <PaymentMethod />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/me/orders"
+        element={
+          <ProtectedRoute>
+            <MyOrders />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/me/order/:id"
+        element={
+          <ProtectedRoute>
+            <OrderDetails />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/invoice/order/:id"
+        element={
+          <ProtectedRoute>
+            <Invoice />
           </ProtectedRoute>
         }
       />

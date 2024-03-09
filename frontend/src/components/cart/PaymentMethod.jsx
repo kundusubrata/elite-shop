@@ -1,14 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MetaData from "../layout/MetaData";
 import { useSelector } from "react-redux";
 import CheckoutSteps from "./CheckoutSteps";
 import { caluclateOrderCost } from "../helpers/Helper";
+import { useNavigate } from "react-router-dom";
+import { useCreateNewOrderMutation } from "../../redux/api/orderApi";
+import toast from "react-hot-toast";
 
 const PaymentMethod = () => {
   const [method, setMethod] = useState("");
 
+  const navigate = useNavigate();
+
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
 
+  const [createNewOrder, { error, isSuccess }] =
+    useCreateNewOrderMutation();
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error?.data?.message);
+    }
+
+    if (isSuccess) {
+      navigate("/me/orders?order_success=true");
+    }
+  }, [error, isSuccess, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -30,7 +47,8 @@ const PaymentMethod = () => {
         },
         paymentMethod: "COD",
       };
-      alert("Ok");
+
+      createNewOrder(orderData);
     }
 
     if (method === "Card") {
