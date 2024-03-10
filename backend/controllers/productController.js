@@ -139,13 +139,11 @@ export const deleteProductImage = catchAsyncErrors(async (req, res) => {
 });
 
 // Delete Product -- ADMIN   ==>  /api/v1/admin/products/:id
-export const deleteProduct = catchAsyncErrors(async (req, res, next) => {
+export const deleteProduct = catchAsyncErrors(async (req, res) => {
   const product = await Product.findById(req?.params?.id);
+
   if (!product) {
-    // res.status(404).json({
-    //   error: "Product not found with this id",
-    // });
-    return next(new ErrorHandler("Product not found with this id", 404));
+    return next(new ErrorHandler("Product not found", 404));
   }
 
   // Deleting image associated with product
@@ -153,11 +151,10 @@ export const deleteProduct = catchAsyncErrors(async (req, res, next) => {
     await delete_file(product?.images[i].public_id);
   }
 
-  await Product.deleteOne();
+  await product.deleteOne();
 
   res.status(200).json({
-    success: true,
-    message: "Product deleted",
+    message: "Product Deleted",
   });
 });
 
@@ -206,7 +203,7 @@ export const createProductReview = catchAsyncErrors(async (req, res, next) => {
 
 // Get product reviews   =>  /api/v1/reviews
 export const getProductReviews = catchAsyncErrors(async (req, res, next) => {
-  const product = await Product.findById(req.query.id);
+  const product = await Product.findById(req.query.id).populate("reviews.user");
 
   if (!product) {
     return next(new ErrorHandler("Product not found", 404));

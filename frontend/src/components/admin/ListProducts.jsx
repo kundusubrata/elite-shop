@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import Loader from "../layout/Loader";
-import { toast } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { MDBDataTable } from "mdbreact";
 import { Link } from "react-router-dom";
 import MetaData from "../layout/MetaData";
@@ -9,6 +8,7 @@ import {
   useGetAdminProductsQuery,
 } from "../../redux/api/productsApi";
 import AdminLayout from "../layout/AdminLayout";
+import Loader from "../layout/Loader";
 
 const ListProducts = () => {
   const { data, isLoading, error } = useGetAdminProductsQuery();
@@ -22,11 +22,9 @@ const ListProducts = () => {
     if (error) {
       toast.error(error?.data?.message);
     }
-
     if (deleteError) {
       toast.error(deleteError?.data?.message);
     }
-
     if (isSuccess) {
       toast.success("Product Deleted");
     }
@@ -54,7 +52,6 @@ const ListProducts = () => {
           field: "stock",
           sort: "asc",
         },
-
         {
           label: "Actions",
           field: "actions",
@@ -102,17 +99,17 @@ const ListProducts = () => {
 
   return (
     <AdminLayout>
-      <MetaData title={"All Products"} />
-
-      <h1 className="my-5">{data?.products?.length} Products</h1>
-
-      <MDBDataTable
-        data={setProducts()}
-        className="px-3"
-        bordered
-        striped
-        hover
-      />
+      <MetaData title={"Admin Products"} />
+      <div>
+        <h1 className="my-5">{data?.products?.length} Products</h1>
+        <MDBDataTable
+          data={setProducts()}
+          className="px-3"
+          bordered
+          striped
+          hover
+        />
+      </div>
     </AdminLayout>
   );
 };
