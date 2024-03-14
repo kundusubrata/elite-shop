@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useLoginMutation } from "../../redux/api/authApi";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import MetaData from "../layout/MetaData";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,20 +11,17 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const [login, { isLoading, error, }] = useLoginMutation();
+  const [login, { isLoading, error }] = useLoginMutation();
   const { isAuthenticated } = useSelector((state) => state.auth);
-
 
   useEffect(() => {
     if (isAuthenticated) {
-        navigate("/");
-      }
+      navigate("/");
+    }
     if (error) {
       toast.error(error?.data?.message);
     }
-    setEmail("");
-    setPassword("");
-  }, [error,isAuthenticated,navigate]);
+  }, [error, isAuthenticated, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -38,6 +36,7 @@ const Login = () => {
 
   return (
     <>
+      <MetaData title={"Login"} />
       <div className="row wrapper">
         <div className="col-10 col-lg-5">
           <form className="shadow rounded bg-body" onSubmit={submitHandler}>
