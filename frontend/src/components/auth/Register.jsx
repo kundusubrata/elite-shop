@@ -4,21 +4,6 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const useDebounce = (value, delay) => {
-  const [debouncedValue, setDebouncedValue] = useState(value);
-
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [value, delay]);
-
-  return debouncedValue;
-};
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -35,10 +20,6 @@ const Register = () => {
 
     const { isAuthenticated } = useSelector((state) => state.auth);
 
-  const debounceDelay = 1000;
-  const debouncedName = useDebounce(name, debounceDelay);
-  const debouncedEmail = useDebounce(email, debounceDelay);
-  const debouncedPassword = useDebounce(password, debounceDelay);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -80,7 +61,7 @@ const Register = () => {
               id="name_field"
               className="form-control"
               name="name"
-              value={debouncedName}
+              value={name}
               onChange={onChange}
             />
           </div>
@@ -94,7 +75,7 @@ const Register = () => {
               id="email_field"
               className="form-control"
               name="email"
-              value={debouncedEmail}
+              value={email}
               onChange={onChange}
             />
           </div>
@@ -108,7 +89,7 @@ const Register = () => {
               id="password_field"
               className="form-control"
               name="password"
-              value={debouncedPassword}
+              value={password}
               onChange={onChange}
             />
           </div>

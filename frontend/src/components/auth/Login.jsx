@@ -7,34 +7,12 @@ import { useSelector } from "react-redux";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [debouncedEmail, setDebouncedEmail] = useState("");
-  const [debouncedPassword, setDebouncedPassword] = useState("");
 
   const navigate = useNavigate();
 
   const [login, { isLoading, error, }] = useLoginMutation();
   const { isAuthenticated } = useSelector((state) => state.auth);
 
-
-  useEffect(() => {
-    const debounceTimeoutEmail = setTimeout(() => {
-      setDebouncedEmail(email);
-    }, 1000);
-
-    return () => {
-      clearTimeout(debounceTimeoutEmail);
-    };
-  }, [email]);
-
-  useEffect(() => {
-    const debounceTimeoutPassword = setTimeout(() => {
-      setDebouncedPassword(password);
-    }, 1000);
-
-    return () => {
-      clearTimeout(debounceTimeoutPassword);
-    };
-  }, [password]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -51,8 +29,8 @@ const Login = () => {
     e.preventDefault();
 
     const loginData = {
-      email: debouncedEmail,
-      password: debouncedPassword,
+      email,
+      password,
     };
 
     login(loginData);
