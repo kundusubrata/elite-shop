@@ -104,12 +104,12 @@ export const updateOrder = catchAsyncErrors(async (req, res, next) => {
         break;
       }
 
-      console.log(`Updating stock for product ${product.name} (${product._id})`);
-      console.log(`Old Stock: ${product.stock}`);
+      // console.log(`Updating stock for product ${product.name} (${product._id})`);
+      // console.log(`Old Stock: ${product.stock}`);
 
       product.stock = product.stock - item.quantity;
 
-      console.log(`New Stock: ${product.stock}`);
+      // console.log(`New Stock: ${product.stock}`);
 
       await product.save({ validateBeforeSave: false });
     }

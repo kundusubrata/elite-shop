@@ -13,7 +13,7 @@ import {
   updateProduct,
   uploadProductImages,
 } from "../controllers/productController.js";
-import { authorizeRoles, isAuthenticatedUser } from "../utils/auth.js";
+import { authorizeRoles, isAuthenticatedUser } from "../middlewares/auth.js";
 
 const router = express.Router();
 

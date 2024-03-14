@@ -93,7 +93,7 @@ const Cart = () => {
                             type="number"
                             className="form-control count d-inline"
                             value={item?.quantity}
-                            readonly
+                            readOnly
                           />
                           <span
                             className="btn btn-primary plus"

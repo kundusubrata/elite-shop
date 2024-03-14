@@ -17,17 +17,26 @@ dotenv.config({ path: "./backend/config/config.env" });
 //Connecting to Database
 connectDatabase();
 
-app.use(express.json({ limit: "10mb" }));
+app.use(
+  express.json({
+    limit: "10mb",
+    verify: (req, res, buf) => {
+      req.rawBody = buf.toString();
+    },
+  })
+);
 app.use(cookieParser());
 
 //Import All Routers
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
+import paymentRoutes from "./routes/paymentRoutes.js";
 
 app.use("/api/v1/", productRoutes);
 app.use("/api/v1/", userRoutes);
 app.use("/api/v1/", orderRoutes);
+app.use("/api/v1/", paymentRoutes);
 
 // Using errors middlewares
 app.use(errorMiddlewares);

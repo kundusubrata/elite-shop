@@ -48,6 +48,16 @@ export const orderApi = createApi({
       },
       invalidatesTags: ["AdminOrders"],
     }),
+
+    stripeCheckoutSession: builder.mutation({
+      query(body) {
+        return {
+          url: "/payment/checkout_session",
+          method: "POST",
+          body,
+        };
+      },
+    }),
   }),
 });
 
@@ -59,4 +69,5 @@ export const {
   useGetAdminOrdersQuery,
   useUpdateOrderMutation,
   useDeleteOrderMutation,
+  useStripeCheckoutSessionMutation,
 } = orderApi;
