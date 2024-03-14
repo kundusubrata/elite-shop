@@ -1,7 +1,7 @@
 import "./App.css";
 // import Footer from "./components/layout/Footer";
 // import Header from "./components/layout/Header";
-import { BrowserRouter as Router, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Routes,Route } from "react-router-dom";
 import useUserRoutes from "./components/routes/userRoutes";
 import useAdminRoutes from "./components/routes/adminRoutes";
 import { Toaster } from "react-hot-toast";
@@ -10,6 +10,7 @@ import { lazy, Suspense } from "react";
 import Loader from "./components/layout/Loader";
 const Header = lazy(() => import("./components/layout/Header"));
 const Footer = lazy(() => import("./components/layout/Footer"));
+const NotFound = lazy(() => import("./components/layout/NotFound"));
 
 function App() {
   const userRoutes = useUserRoutes();
@@ -24,6 +25,7 @@ function App() {
             <Routes>
               {userRoutes}
               {adminRoutes}
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
           <Footer />

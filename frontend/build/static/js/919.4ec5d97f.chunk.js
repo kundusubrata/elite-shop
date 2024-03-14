@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkfrontend=self.webpackChunkfrontend||[]).push([[919],{6919:(e,s,t)=>{t.r(s),t.d(s,{default:()=>n});t(5043);var l=t(579);const n=()=>(0,l.jsx)(l.Fragment,{children:(0,l.jsx)("footer",{className:"py-1 pt-5",children:(0,l.jsx)("p",{className:"text-center mt-1 fw-bold",children:"Elite Shop - 2023-2024, All Rights Reserved"})})})}}]);
+//# sourceMappingURL=919.4ec5d97f.chunk.js.map
